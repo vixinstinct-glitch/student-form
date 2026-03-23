@@ -31,8 +31,8 @@
             status.innerText = '傳送中...';
 
             try {
-                // !!! 這裡要換成你 n8n 的 Webhook URL !!!
-                const webhookUrl = '你的_N8N_WEBHOOK_URL'; 
+                // 已將您的 Production URL 填入下方
+                const webhookUrl = 'https://cislunar-minna-muhly.ngrok-free.dev/webhook/callback'; 
 
                 const response = await fetch(webhookUrl, {
                     method: 'POST',
@@ -48,11 +48,12 @@
                     status.innerText = '報到成功！感謝您的參與。';
                     document.getElementById('phone').value = '';
                 } else {
-                    throw new Error();
+                    throw new Error('Response not ok');
                 }
             } catch (error) {
                 status.style.color = 'red';
-                status.innerText = '連線失敗，請稍後再試。';
+                status.innerText = '連線失敗，請檢查 n8n 是否已開啟 Active。';
+                console.error('Error:', error);
             }
         }
     </script>
